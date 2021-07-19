@@ -22,10 +22,7 @@ chart_data = pd.DataFrame(
      np.random.randn(20, 3),
      columns=['a', 'b', 'c'])
 
-col1.write(df)
-col2.write(chart_data)
-
-st.line_chart(chart_data)
+line_chart = st.line_chart(chart_data)
 
 map_data = pd.DataFrame(
     np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
@@ -33,9 +30,8 @@ map_data = pd.DataFrame(
 
 my_map = st.map(map_data)
 
-left_column, right_column = st.beta_columns(2)
-pressed = left_column.button('Press me?')
-if pressed:
-    right_column.write("Woohoo!")
-
-left_column.my_map
+# col1.write(line_chart)
+col1.line_chart(
+    chart_data,
+    height=500)
+col2.map(map_data)
