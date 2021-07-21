@@ -23,7 +23,7 @@ def load_full_table(table_name):
     return new_df
 
 # Helps client select platform and provides statistics
-def crowdfunder_platform_selector(available_categories, engine):
+def crowdfunder_platform_selector(available_categories, ks_ig_df, engine):
     """Determine which platform to start project on
 
     Platform selection criteria is based on:
@@ -49,10 +49,14 @@ def crowdfunder_platform_selector(available_categories, engine):
         ).ask()
     
     print("Running report ...")
+    #TODO
+    percent_stats = ks_ig_df.loc[category_type]
+    ks_success = percent_stats['percent_success_ks']
+    ig_success = percent_stats['percent_success_ig']
 
-    platform_to_use = 'Kickstarter'
+    platform_to_use = 'Kickstarter' if ks_success > ig_success else 'Indigogo'
 
-    print(f"Based on your category of {category_type} you should use {platform_to_use} as your platform.")
+    print(f"Based on your category of {category_type} you should use {platform_to_use} as your platform, because it has a succes rate of {ks_success:.2f} for this category.")
 
     continue_running = questionary.confirm("Do you want to look at a different category?").ask()
 
@@ -76,6 +80,6 @@ if __name__ == "__main__":
     # While running is `True` call the `crowdfunder_platform_selector` function.
     # Pass the `available_categories` DsataFrame `sectors` and the database `engine` as parameters.
     while running:  
-        running = crowdfunder_platform_selector(available_categories=avl_categories, engine=engine)
+        running = crowdfunder_platform_selector(available_categories=avl_categories, ks_ig_df=percent_success_fail_ks_ig, engine=engine)
 
     print('Thanks for using...')
