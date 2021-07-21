@@ -33,6 +33,10 @@ This project leverages python 3.7.9 with the following packages:
 
 * [Voilà](https://github.com/voila-dashboards/voila) - This will allow us to view our Crowdfunding Analysis on the web browser.
 
+* [Wordcloud](https://pypi.org/project/wordcloud/) - This will allow us to create a wordcloud data visualization technique that is used for representing text data. 
+
+* [Plotnine](https://plotnine.readthedocs.io/en/stable/installation.html)- This is a data visualisation package for Python based on the grammar of graphics.
+
 ---
 
 ## **Installation Guide**
@@ -46,6 +50,9 @@ This project leverages python 3.7.9 with the following packages:
     conda install -c pyviz hvplot
     conda list nodejs
     conda list sqlalchemy
+    conda install -c conda-forge plotnine
+    conda install -c conda-forge wordcloud
+
   ```
 2. To show your crowdfunding analysis tool on your web browser, use `voila` command on the conda dev terminal and while on the correct directory of your crowdfunding analysis application:
 
@@ -53,6 +60,21 @@ This project leverages python 3.7.9 with the following packages:
     * This will pop up on your web browser.
 
 ---
+
+## **Examples**
+![Plot Kickstater and Indiegogo](./Resources/Images/plot_ks_indiegogo.gif)
+
+
+---
+
+## **Usages**
+1. Click the crowdfunding_questionary.py and type in the category of your project. So that you can check which platform would work for you better.
+
+2. We use the crowdfunding_analyzer.ipynb to get the comparison on Kickstarter versus Indiegogo. It will show data visualization of each main category.
+
+
+---
+
 
 ## **Contributors**
 
