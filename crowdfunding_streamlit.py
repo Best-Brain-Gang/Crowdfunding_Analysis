@@ -32,6 +32,7 @@ def main():
     # Menu
     menu = ['Intro',
     'Members and Roles',
+    'KS vs. IG Project Analysis',
     'Duration Analysis',
     'Indiegogo',
     'USA Analysis']
@@ -42,6 +43,8 @@ def main():
         setup_intro_page()
     elif choice == 'Members and Roles':
         setup_member_and_role_page()
+    elif choice == 'KS vs. IG Project Analysis':
+        ks_vs_ig_project_analysis()
     elif choice == 'Duration Analysis':
         setup_duration_page()
     elif choice == 'Indiegogo':
@@ -70,7 +73,7 @@ def setup_intro_page():
     - We made an interactive command line "app" using questionary
     ''')
 
-# Home page setup   
+# Member and role page setup   
 def setup_member_and_role_page():
     # Setup cols
     col1, col2 = st.beta_columns(2)
@@ -87,6 +90,32 @@ def setup_member_and_role_page():
     # Add slide
     team_members = Image.open('./Resources/Images/team_member.png')
     st.image(team_members)
+
+# Ks vs. Ig project analysis 
+def ks_vs_ig_project_analysis():
+    st.title('Kickstarter and Indiegogo Project Analysis')
+
+    query = """
+            SELECT main_category, COUNT (*) AS Total_number_of_projects, AVG(funded_percent) AS average_fund_percentage
+            FROM kickstarter_large
+            GROUP BY main_category
+            ORDER BY
+                total_number_of_projects DESC;
+            """
+
+    ks_main_category_total = pd.read_sql_query(
+        query, 
+        con= engine)
+    ks_main_category_total
+
+    chart_data = pd.DataFrame(
+        np.random.randn(50, 3),
+        columns=["a", "b", "c"])
+
+    st.bar_chart(chart_data)
+
+    st.bar_chart(ks_main_category_total)
+
 
 # Simple example page layout
 def setup_simple_page():
