@@ -12,28 +12,13 @@ import pydeck as pdk
 import pandas as pd
 import math
 
-######## Main for navbar
-def main():
-
-    # Menu
-    menu = ['Home', 'Duration Analysis', 'Indiegogo', 'USA Analysis']
-
-    choice = st.sidebar.selectbox('Menu', menu)
-
-    if choice == 'Home':
-        setup_home_page()
-    elif choice == 'Duration Analysis':
-        setup_duration_page()
-    elif choice == 'Indiegogo':
-        setup_simple_page()
-    else:
-        setup_simple_page()
-
+######## Config ########
 # Setup vars that can only be called one time
 def setup_streamlit():
     # Setup page wide to make use of full screen
     st.set_page_config(layout="wide")
 
+# Connect to the db
 def connect_db():
     # Establishes Database Connection with a temporary SQL db (we can update to give it a name later)
     database_connection_string = "sqlite:///crowdfunding.db"
@@ -41,9 +26,34 @@ def connect_db():
     engine = sqlalchemy.create_engine(database_connection_string)
     return engine
 
+######## Main for navbar ########
+def main():
+
+    # Menu
+    menu = ['Intro',
+    'Members and Roles',
+    'Duration Analysis',
+    'Indiegogo',
+    'USA Analysis']
+
+    choice = st.sidebar.selectbox('Menu', menu)
+
+    if choice == 'Intro':
+        setup_intro_page()
+    elif choice == 'Members and Roles':
+        setup_member_and_role_page()
+    elif choice == 'Duration Analysis':
+        setup_duration_page()
+    elif choice == 'Indiegogo':
+        setup_simple_page()
+    else:
+        setup_simple_page()
+
+######## Pages setup ########
 # Home page setup   
-def setup_home_page():
-    st.title('Welcome to Crowdfunder Analysis')
+def setup_intro_page():
+    # Add title
+    st.title('Welcome to Crowdfunder Analyzer')
 
     # Add image at top
     kickstarter_vs_indiegogo = Image.open('./Resources/Images/kickstarter_indiegogo.jpeg')
@@ -60,8 +70,62 @@ def setup_home_page():
     - We made an interactive command line "app" using questionary
     ''')
 
+# Home page setup   
+def setup_member_and_role_page():
+    # Setup cols
+    col1, col2 = st.beta_columns(2)
+
+    # Add image at top
+    image_i = Image.open('./Resources/Images/i_wordcloud.png')
+    image_k = Image.open('./Resources/Images/k_wordcloud.png')
+    col1.image(image_k)
+    col2.image(image_i)
+
+    # Add title
+    st.title('Project Members and Roles')
+
+    # Add slide
+    team_members = Image.open('./Resources/Images/team_member.png')
+    st.image(team_members)
+
 # Simple example page layout
+def setup_simple_page():
+    st.title('My first app')
+
+    st.write("Here's our first attempt at using data to create a table:")
+
+    df = pd.DataFrame({
+        'first column': [1, 2, 3, 4],
+        'second column': [10, 20, 30, 40]
+    })
+
+
+    chart_data = pd.DataFrame(
+        np.random.randn(20, 3),
+        columns=['a', 'b', 'c'])
+
+    line_chart = st.line_chart(chart_data)
+
+    map_data = pd.DataFrame(
+        np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+        columns=['lat', 'lon'])
+
+    my_map = st.map(map_data)
+
+    # Use the full page instead of a narrow central column
+    col1, col2 = st.beta_columns(2)
+
+    # col1.write(line_chart)
+    col1.line_chart(
+        chart_data,
+        height=500)
+    col2.map(map_data)
+
+# Setup duration page
 def setup_duration_page():
+    # Setup cols
+    col1, col2 = st.beta_columns(2)
+
     st.title('Analysis of Duration')
 
     st.markdown(''' 
@@ -74,7 +138,7 @@ def setup_duration_page():
     - We made an interactive command line "app" using questionary
     ''')
 
-    # Use the full page instead of a narrow central column
+    # Setup cols
     col1, col2 = st.beta_columns(2)
 
     # Create a SQL query to get the main_category and duration of the Kickstarter Large dataframe.
@@ -178,41 +242,11 @@ def setup_duration_page():
         layers=[layer],
         initial_view_state=view_state,
         tooltip={"text": "{Country}\n{Total_number_of_projects}"}
-        )) 
+        ))
 
-# Simple example page layouts
-def setup_simple_page():
-    st.title('My first app')
+######## Components ########
 
-    st.write("Here's our first attempt at using data to create a table:")
-
-    df = pd.DataFrame({
-        'first column': [1, 2, 3, 4],
-        'second column': [10, 20, 30, 40]
-    })
-
-
-    chart_data = pd.DataFrame(
-        np.random.randn(20, 3),
-        columns=['a', 'b', 'c'])
-
-    line_chart = st.line_chart(chart_data)
-
-    map_data = pd.DataFrame(
-        np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-        columns=['lat', 'lon'])
-
-    my_map = st.map(map_data)
-
-    # Use the full page instead of a narrow central column
-    col1, col2 = st.beta_columns(2)
-
-    # col1.write(line_chart)
-    col1.line_chart(
-        chart_data,
-        height=500)
-    col2.map(map_data)
-
+######## Main ########  
 if __name__ == '__main__':
     setup_streamlit()
     engine = connect_db()
