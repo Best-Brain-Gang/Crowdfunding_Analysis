@@ -6,6 +6,21 @@ import sqlalchemy as sql
 import fire
 import sys
 import questionary
+from IPython.display import display
+
+# Function to load table into DB
+# data is the dataframe we want to save, 
+# table name is the name of the new table (as a string value), 
+# and engine is the engine input established earlier
+def new_table(data, table_name):
+    data.to_sql(f"{table_name}", engine, index=True, if_exists="replace")
+
+
+# Lets us load the table of our choice from the database, just set the function equal to a new dataframe variable and run 
+# must set the table name as a string value
+def load_full_table(table_name):
+    new_df = pd.read_sql_table(f"{table_name}", con=engine )
+    return new_df
 
 # Helps client select platform and provides statistics
 def crowdfunder_platform_selector(available_categories, engine):
@@ -28,7 +43,10 @@ def crowdfunder_platform_selector(available_categories, engine):
     print("based off of failed/success and funding statistics\n")
 
     # Use questionary, to ask for project category.
-    category_type = questionary.text("Enter your project category:").ask()
+    category_type = questionary.select(
+        "What is your project category?",
+        choices=available_categories,
+        ).ask()
     
     print("Running report ...")
 
@@ -43,28 +61,21 @@ def crowdfunder_platform_selector(available_categories, engine):
 
 if __name__ == "__main__":
 
-    # Database connection string to the avaialbe categories
-    # TODO
+    # Establishes Database Connection with a temporary SQL db (we can update to give it a name later)
+    database_connection_string = "sqlite:///crowdfunding_db"
+    engine = sql.create_engine(database_connection_string)
 
-    # Create an engine to interact with the database
-    # TODO
-
-    # Read the categories table into a dataframe called `available_categories`
-    # TODO
-
-    # Get a list of available categories
-    # TODO
+    # Get available categoriess
+    percent_success_fail_ks_ig = load_full_table('percent_success_fail_ks_ig')
+    percent_success_fail_ks_ig.set_index('main_category', inplace=True)
+    avl_categories = list(percent_success_fail_ks_ig.index)
 
     # Create a variable named running and set it to True
     running = True
 
     # While running is `True` call the `crowdfunder_platform_selector` function.
-    # Pass the `available_categories` DataFrame `sectors` and the database `engine` as parameters.
-    while running:
-        continue_running = crowdfunder_platform_selector(available_categories=['a', 'b', 'c'], engine='my_engine')
-        if continue_running == 'y':
-            running = True
-        else:
-            running = False
+    # Pass the `available_categories` DsataFrame `sectors` and the database `engine` as parameters.
+    while running:  
+        running = crowdfunder_platform_selector(available_categories=avl_categories, engine=engine)
 
     print('Thanks for using...')
