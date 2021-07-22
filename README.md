@@ -91,6 +91,7 @@ This project leverages python 3.7.9 with the following packages:
 ## **Examples**
 
 Sample plots for Kickstarter and Indiegogo.
+
 ![Plot Kickstater and Indiegogo](./Resources/Images/plot_ks_indiegogo.gif)
 
 ---
