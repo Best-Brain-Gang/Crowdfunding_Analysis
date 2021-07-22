@@ -39,26 +39,31 @@ def crowdfunder_platform_selector(available_categories, ks_ig_df, engine):
 
     # Print a welcome message for the application
     print("\n......Welcome to the Crowdfunding Platform Selector.....\n")
-    print("Provide us with your project category and we will tell you which platform to use\n")
-    print("based off of failed/success and funding statistics\n")
+    print("Provide us with your project category and we will tell you which platform to use")
+    print("based off of failed/success and funding statistics.\n")
 
     # Use questionary, to ask for project category.
     category_type = questionary.select(
-        "What is your project category?",
+        "What is your project category?\n",
         choices=available_categories,
         ).ask()
     
-    print("Running report ...")
+    print("\nRunning report ...\n")
     #TODO
     percent_stats = ks_ig_df.loc[category_type]
-    ks_success = percent_stats['percent_success_ks']
-    ig_success = percent_stats['percent_success_ig']
+    high_success = percent_stats['percent_success_ks']
+    low_success = percent_stats['percent_success_ig']
 
-    platform_to_use = 'Kickstarter' if ks_success > ig_success else 'Indigogo'
+    platform_to_use = 'Kickstarter' if percent_stats['percent_success_ks'] > percent_stats['percent_success_ig'] else 'Indigogo'
+    platform_not_to_use = 'Kickstarter' if percent_stats['percent_success_ks'] < percent_stats['percent_success_ig'] else 'Indigogo'
 
-    print(f"Based on your category of {category_type} you should use {platform_to_use} as your platform, because it has a succes rate of {ks_success:.2f} for this category.")
+    if platform_to_use == 'Indiegogo':
+        high_success = percent_stats['percent_success_ks']
+        low_success = percent_stats['percent_success_ig']
 
-    continue_running = questionary.confirm("Do you want to look at a different category?").ask()
+    print(f"Based on your category of {category_type} you should use {platform_to_use} as your platform, because it has a success rate of {high_success:.2f} for this category. {platform_not_to_use} has a lower success rate of {low_success:.2f}.\n\n")
+
+    continue_running = questionary.confirm("Do you want to look at a different category?\n").ask()
 
     return continue_running
 
@@ -82,4 +87,4 @@ if __name__ == "__main__":
     while running:  
         running = crowdfunder_platform_selector(available_categories=avl_categories, ks_ig_df=percent_success_fail_ks_ig, engine=engine)
 
-    print('Thanks for using...')
+    print('\nThanks for using...\n')
