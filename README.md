@@ -97,13 +97,17 @@ Sample plots for Kickstarter and Indiegogo.
 ---
 
 ## **Usages**
-1. Click the crowdfunding_questionary.py and type in the category of your project. So that you can check which platform would work for you better.
+1. We use crowdfunding_questionary.py and type in the category of your project. So that you can check which platform would work for you better.
 
     ![Questionary](./Resources/Images/questionary_small.gif)
 
-2. We use the crowdfunding_analyzer.ipynb to get the comparison on Kickstarter versus Indiegogo. It will show data visualization of each main category.
+2. We use crowdfunding_analyzer.ipynb to get the comparison on Kickstarter versus Indiegogo. It will show data visualization of each main category.
 
     ![Plot Kickstater and Indiegogo Countries](./Resources/Images/ks_indiegogo_country.gif)
+
+3. (WIP)We use crowdfunding_streamlit.py as a dashboard to view our analysis.
+
+    ![Plot Kickstater and Indiegogo Countries](./Resources/Images/streamlit.gif)
 
 
 ---
