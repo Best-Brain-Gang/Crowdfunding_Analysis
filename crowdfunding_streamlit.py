@@ -32,10 +32,8 @@ def main():
     # Menu
     menu = ['Intro',
     'Members and Roles',
-    'KS vs. IG Project Analysis',
-    'Duration Analysis',
-    'Indiegogo',
-    'USA Analysis']
+    'Duration Analysis'
+    ]
 
     choice = st.sidebar.selectbox('Menu', menu)
 
@@ -43,14 +41,8 @@ def main():
         setup_intro_page()
     elif choice == 'Members and Roles':
         setup_member_and_role_page()
-    elif choice == 'KS vs. IG Project Analysis':
-        ks_vs_ig_project_analysis()
-    elif choice == 'Duration Analysis':
-        setup_duration_page()
-    elif choice == 'Indiegogo':
-        setup_simple_page()
     else:
-        setup_simple_page()
+        setup_duration_page()
 
 ######## Pages setup ########
 # Home page setup   
@@ -91,81 +83,12 @@ def setup_member_and_role_page():
     team_members = Image.open('./Resources/Images/team_member.png')
     st.image(team_members)
 
-# Ks vs. Ig project analysis 
-def ks_vs_ig_project_analysis():
-    st.title('Kickstarter and Indiegogo Project Analysis')
-
-    query = """
-            SELECT main_category, COUNT (*) AS Total_number_of_projects, AVG(funded_percent) AS average_fund_percentage
-            FROM kickstarter_large
-            GROUP BY main_category
-            ORDER BY
-                total_number_of_projects DESC;
-            """
-
-    ks_main_category_total = pd.read_sql_query(
-        query, 
-        con= engine)
-    ks_main_category_total
-
-    chart_data = pd.DataFrame(
-        np.random.randn(50, 3),
-        columns=["a", "b", "c"])
-
-    st.bar_chart(chart_data)
-
-    st.bar_chart(ks_main_category_total)
-
-
-# Simple example page layout
-def setup_simple_page():
-    st.title('My first app')
-
-    st.write("Here's our first attempt at using data to create a table:")
-
-    df = pd.DataFrame({
-        'first column': [1, 2, 3, 4],
-        'second column': [10, 20, 30, 40]
-    })
-
-
-    chart_data = pd.DataFrame(
-        np.random.randn(20, 3),
-        columns=['a', 'b', 'c'])
-
-    line_chart = st.line_chart(chart_data)
-
-    map_data = pd.DataFrame(
-        np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-        columns=['lat', 'lon'])
-
-    my_map = st.map(map_data)
-
-    # Use the full page instead of a narrow central column
-    col1, col2 = st.beta_columns(2)
-
-    # col1.write(line_chart)
-    col1.line_chart(
-        chart_data,
-        height=500)
-    col2.map(map_data)
-
 # Setup duration page
 def setup_duration_page():
     # Setup cols
     col1, col2 = st.beta_columns(2)
 
     st.title('Analysis of Duration')
-
-    st.markdown(''' 
-    # Crowdfunding Analysis
-    This project attempts to help project creators understand how to market their project on Kickstarter vs Indiegogo or other crowdfunding platforms.
-    The purpose of this tool is to not only give them some advice on platforms but be able to efficiently market their project.
-
-    We did the following for this project:
-    - We analyzed Kickstarter vs. Indiegogo using Jupyter notebook
-    - We made an interactive command line "app" using questionary
-    ''')
 
     # Setup cols
     col1, col2 = st.beta_columns(2)
@@ -265,15 +188,13 @@ def setup_duration_page():
     view_state = pdk.ViewState(latitude=37.983810, longitude=-23.727539, zoom=1, bearing=0, pitch=0)
 
 
-    st.subheader('Kickstarter number of projects by country map')
+    st.subheader('Kickstarter Number of Projects by Country')
     
     st.pydeck_chart(pdk.Deck(
         layers=[layer],
         initial_view_state=view_state,
         tooltip={"text": "{Country}\n{Total_number_of_projects}"}
         ))
-
-######## Components ########
 
 ######## Main ########  
 if __name__ == '__main__':
