@@ -95,12 +95,12 @@ def setup_duration_page():
 
     # Create a SQL query to get the main_category and duration of the Kickstarter Large dataframe.
     query_ks = """
-    SELECT main_category, duration
-    FROM kickstarter_large
+    SELECT *
+    FROM ks_duration
     """
     query_indiegogo = """
-    SELECT main_category, duration
-    FROM indie_gogo
+    SELECT *
+    FROM ig_duration
     """
 
     # This will let us read the query we applied earlier to create a dataframe.
@@ -121,15 +121,8 @@ def setup_duration_page():
     # Create a SQL query to get the main_category and 
     # duration of the Kickstarter Large dataframe and 
     # group them by main_category and get its average duration days.
-    query="""SELECT
-    main_category, AVG(duration) AS average_duration_days
-    FROM
-    kickstarter_large
-    GROUP BY
-    main_category
-    ORDER BY 
-        AVG(duration) DESC,
-        main_category DESC;
+    query="""SELECT *
+    FROM ks_avg_duration
     """
     # This will let us read the query we applied earlier to create a dataframe.
     ks_large_groupby_maincategory_df = pd.read_sql_query(
@@ -153,11 +146,8 @@ def setup_duration_page():
 
     # Create a SQL query to get the total number of projects in Kickstarter Large dataframe per country.
     query_ks_country = """
-    SELECT full_country_names AS Country, COUNT (*) AS Total_number_of_projects, lat, lon
-    FROM kickstarter_large
-    GROUP BY full_country_names
-    ORDER BY
-        total_number_of_projects DESC;
+    SELECT *
+    FROM ks_total_projects_lat_long
     """
 
     # This will let us read the query we applied earlier to create a dataframe.
