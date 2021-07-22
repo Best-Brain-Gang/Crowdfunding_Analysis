@@ -64,17 +64,17 @@ This project leverages python 3.7.9 with the following packages:
     pip install plotly
     pip install hvplot
     pip install jupyterlab
-    conda install -c pyviz hvplot
-    conda list nodejs
-    conda list sqlalchemy
-    conda install -c conda-forge plotnine
-    conda install -c conda-forge wordcloud
     pip install streamlit
     pip install seaborn
     pip install fire
     pip install questionary
     pip install pytest
     pip install python-dotenv
+    conda install -c pyviz hvplot
+    conda list nodejs
+    conda list sqlalchemy
+    conda install -c conda-forge plotnine
+    conda install -c conda-forge wordcloud
  
   ```
 
@@ -99,9 +99,11 @@ Sample plots for Kickstarter and Indiegogo.
 ## **Usages**
 1. Click the crowdfunding_questionary.py and type in the category of your project. So that you can check which platform would work for you better.
 
+    ![Questionary](./Resources/Images/questionary_small.gif)
+
 2. We use the crowdfunding_analyzer.ipynb to get the comparison on Kickstarter versus Indiegogo. It will show data visualization of each main category.
 
-![Plot Kickstater and Indiegogo Countries](./Resources/Images/ks_indiegogo_country.gif)
+    ![Plot Kickstater and Indiegogo Countries](./Resources/Images/ks_indiegogo_country.gif)
 
 
 ---
