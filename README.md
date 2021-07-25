@@ -128,8 +128,8 @@ Sample plots for Kickstarter and Indiegogo.
 ## **Deck**
 
 Click [HERE](./Resources/Images/crowdfunding_analyzer.pdf) to learn more from our presentation.
-[![Crowdfunding Deck](./Resources/Images/crowdfunding_analyzer_intro.jpg)](./Resources/Images/crowdfunding_analyzer.pdf)
 
+[![Crowdfunding Deck](./Resources/Images/crowdfunding_analyzer_intro.png)](./Resources/Images/crowdfunding_analyzer.pdf)
 ---
 
 ## **License**
