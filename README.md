@@ -1,6 +1,9 @@
+<head>
+  <base href="">
+</head>
 
- <p align="center">
- <img src="./Resources/Images/kickstarter_indiegogo.jpeg" alt="Girl in a jacket" width="500" height="300"> 
+<p align="center">
+<img src="./Resources/Images/kickstarter_indiegogo.jpeg" alt="Girl in a jacket" width="500" height="300"> 
 </p>
 
 <p>&nbsp;</p>
@@ -59,24 +62,24 @@ This project leverages python 3.7.9 with the following packages:
 ## **Installation Guide**
 1. On the terminal, under the conda dev environment, install the following packages and dependencies before running the crowdfunding analysis tool:
 
-  ```
-    pip install pandas
-    pip install plotly
-    pip install hvplot
-    pip install jupyterlab
-    pip install streamlit
-    pip install seaborn
-    pip install fire
-    pip install questionary
-    pip install pytest
-    pip install python-dotenv
-    conda install -c pyviz hvplot
-    conda list nodejs
-    conda list sqlalchemy
-    conda install -c conda-forge plotnine
-    conda install -c conda-forge wordcloud
- 
-  ```
+    ```
+      pip install pandas
+      pip install plotly
+      pip install hvplot
+      pip install jupyterlab
+      pip install streamlit
+      pip install seaborn
+      pip install fire
+      pip install questionary
+      pip install pytest
+      pip install python-dotenv
+      conda install -c pyviz hvplot
+      conda list nodejs
+      conda list sqlalchemy
+      conda install -c conda-forge plotnine
+      conda install -c conda-forge wordcloud
+  
+    ```
 
 2. To show your crowdfunding analysis tool on your web browser, use `voila` command on the conda dev terminal and while on the correct directory of your crowdfunding analysis application:
 
@@ -92,7 +95,7 @@ This project leverages python 3.7.9 with the following packages:
 
 Sample plots for Kickstarter and Indiegogo.
 
-![Plot Kickstater and Indiegogo](./Resources/Images/plot_ks_indiegogo.gif)
+    ![Plot Kickstater and Indiegogo](./Resources/Images/plot_ks_indiegogo.gif)
 
 ---
 
@@ -119,6 +122,13 @@ Sample plots for Kickstarter and Indiegogo.
 
 #### Colin Benjamin [![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/colinbenjamin/) &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp; Justine Cho [![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/justinecho) &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp; Christopher Henderson [![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/chris-henderson123/) &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp; Nathan Patterson [![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/natepatterson/) 
 
+
+---
+
+## **Deck**
+
+Click [HERE](./Resources/Images/crowdfunding_analyzer.pdf) to learn more from our presentation.
+[![Crowdfunding Deck](./Resources/Images/crowdfunding_analyzer_intro.jpg)](./Resources/Images/crowdfunding_analyzer.pdf)
 
 ---
 
